@@ -4,14 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import net.javaguides.departmentservice.dto.DepartmentDTO;
 import net.javaguides.departmentservice.entity.Department;
+import net.javaguides.departmentservice.exception.DepartmentDuplicateException;
+import net.javaguides.departmentservice.exception.DepartmentNotFoundException;
 import net.javaguides.departmentservice.mapper.DepartmentMapper;
 import net.javaguides.departmentservice.repository.DepartmentRepository;
 import net.javaguides.departmentservice.service.DepartmentService;
-import org.modelmapper.ModelMapper;
+//import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @NoArgsConstructor
@@ -21,10 +25,15 @@ public class DepartmentServiceImpl implements DepartmentService {
     private DepartmentRepository departmentRepository;
 
     @Autowired
-    private ModelMapper modelMapper;
+//    private ModelMapper modelMapper;
 
     @Override
     public DepartmentDTO saveDepartment(DepartmentDTO departmentDTO) {
+
+        Optional<Department> foundDepartment = departmentRepository.findByDepartmentCode(departmentDTO.getDepartmentCode());
+        if(foundDepartment.isPresent()) {
+            throw new DepartmentDuplicateException(departmentDTO.getDepartmentCode());
+        }
 
 //        convert department DTO to department JPA entity
 //        Department department = new Department(
@@ -53,7 +62,9 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public DepartmentDTO getDepartmentByCode(String code) {
-        Department department =  departmentRepository.findByDepartmentCode(code);
+        Department department = departmentRepository.findByDepartmentCode(code)
+                .orElseThrow(()-> new DepartmentNotFoundException(code));
+
 //        DepartmentDTO  departmentDTO = new DepartmentDTO(
 //                department.getId(),
 //                department.getDepartmentName(),
