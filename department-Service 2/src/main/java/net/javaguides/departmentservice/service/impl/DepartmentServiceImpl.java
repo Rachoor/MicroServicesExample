@@ -65,6 +65,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         Department department = departmentRepository.findByDepartmentCode(code)
                 .orElseThrow(()-> new DepartmentNotFoundException(code));
 
+
 //        DepartmentDTO  departmentDTO = new DepartmentDTO(
 //                department.getId(),
 //                department.getDepartmentName(),
