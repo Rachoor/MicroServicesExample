@@ -1,5 +1,6 @@
 package net.javaguides.employeeservice.controller;
 
+import net.javaguides.employeeservice.dto.ApiResponseDTO;
 import net.javaguides.employeeservice.dto.EmployeeDto;
 import net.javaguides.employeeservice.service.EmployeeService;
 import org.springframework.http.ResponseEntity;
@@ -12,5 +13,5 @@ public interface BaseController {
     public ResponseEntity<EmployeeDto> saveEmployee(@RequestBody EmployeeDto employeeDto);
 
     @GetMapping("/{id}")
-    public ResponseEntity<EmployeeDto> getEmployee(@PathVariable Long id);
+    public ResponseEntity<ApiResponseDTO> getEmployee(@PathVariable String id);
 }

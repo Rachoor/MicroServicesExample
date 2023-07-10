@@ -1,5 +1,6 @@
 package net.javaguides.employeeservice.controller;
 
+import net.javaguides.employeeservice.dto.ApiResponseDTO;
 import net.javaguides.employeeservice.dto.EmployeeDto;
 import net.javaguides.employeeservice.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,8 @@ public class EmployeeController implements BaseController{
     }
 
     @Override
-    public ResponseEntity<EmployeeDto> getEmployee(Long id) {
-        EmployeeDto employeeDto = employeeService.getEmployeyById(id);
-        return new ResponseEntity<>(employeeDto, HttpStatus.OK);
+    public ResponseEntity<ApiResponseDTO> getEmployee(String id) {
+        ApiResponseDTO apiResponseDTO = employeeService.getEmployeyById(Long.parseLong(id));
+        return new ResponseEntity<>(apiResponseDTO, HttpStatus.OK);
     }
 }

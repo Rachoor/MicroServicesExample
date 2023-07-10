@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class DepartmentServiceApplication {
 
-	@Bean
+//	@Bean
 //	public ModelMapper modelMapper() {
 //		return new ModelMapper();
 //	}

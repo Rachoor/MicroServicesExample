@@ -24,7 +24,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
-    @Autowired
+//    @Autowired
 //    private ModelMapper modelMapper;
 
     @Override
