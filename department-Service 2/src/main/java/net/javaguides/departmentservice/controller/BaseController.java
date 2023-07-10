@@ -13,4 +13,5 @@ public interface BaseController {
 
     @GetMapping("/{code}")
     public ResponseEntity<DepartmentDTO> getDepartmentByCode(@PathVariable String code) ;
+
 }
